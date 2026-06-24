@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kawansky Simeon | Dev Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e1b4b 100%);
+            color: #f8fafc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 28px;
+            padding: 35px 22px;
+            width: 100%;
+            max-width: 360px;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.7), inset 0 1px 1px rgba(255,255,255,0.1);
+        }
+
+        .avatar {
+            width: 95px;
+            height: 95px;
+            background: linear-gradient(135deg, #38bdf8, #a855f7);
+            border-radius: 50%;
+            margin: 0 auto 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            font-weight: bold;
+            color: #0f172a;
+            box-shadow: 0 0 35px rgba(56, 189, 248, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h1 { font-size: 26px; margin-bottom: 6px; letter-spacing: -0.5px; font-weight: 700; background: linear-gradient(to right, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .tagline { color: #38bdf8; font-size: 13px; margin-bottom: 25px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.03);
+            color: #f8fafc;
+            text-decoration: none;
+            padding: 14px;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        /* Cores de Destaque */
+        .btn-github { background: #1e293b; border-color: #475569; }
+        .btn-story { background: rgba(234, 179, 8, 0.1); border-color: rgba(234, 179, 8, 0.2); color: #fef08a; }
+        .btn-games { background: rgba(168, 85, 247, 0.12); border-color: rgba(168, 85, 247, 0.25); color: #d8b4fe; }
+        .btn-apps { background: rgba(56, 189, 248, 0.12); border-color: rgba(56, 189, 248, 0.25); color: #bae6fd; }
+        .btn-contact { background: rgba(34, 197, 94, 0.12); border-color: rgba(34, 197, 94, 0.25); color: #4ade80; }
+
+        .btn:active {
+            background: #f8fafc;
+            color: #0f172a;
+            transform: scale(0.96);
+        }
+
+        /* Pastas Ocultas */
+        .folder-content {
+            display: none;
+            flex-direction: column;
+            gap: 8px;
+            background: rgba(15, 23, 42, 0.6);
+            padding: 14px;
+            border-radius: 14px;
+            border: 1px dashed rgba(255, 255, 255, 0.06);
+            margin-top: -4px;
+            animation: slideDown 0.2s ease-out;
+            text-align: left;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #cbd5e1;
+        }
+
+        .folder-content strong { color: #f8fafc; }
+
+        .btn-sub {
+            padding: 12px;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.01);
+            border-color: rgba(255, 255, 255, 0.03);
+            text-align: center;
+        }
+
+        .arrow { font-size: 11px; margin-left: auto; color: rgba(255,255,255,0.4); transition: transform 0.2s; }
+
+        /* Formulário de Contato */
+        .contact-form {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            background: rgba(15, 23, 42, 0.6);
+            padding: 15px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: -4px;
+            text-align: left;
+            animation: slideDown 0.2s ease-out;
+        }
+        
+        .contact-form label { font-size: 11px; color: #94a3b8; font-weight: bold; text-transform: uppercase; }
+        .contact-form input, .contact-form textarea {
+            width: 100%; background: #0f172a; border: 1px solid #334155; padding: 10px; border-radius: 8px; color: white; font-size: 14px; outline: none; resize: none;
+        }
+        .contact-form input:focus, .contact-form textarea:focus { border-color: #38bdf8; }
+        
+        .btn-submit {
+            background: #22c55e; color: #0f172a; border: none; padding: 10px; border-radius: 8px; font-weight: bold; font-size: 14px; cursor: pointer; width: 100%; margin-top: 5px;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="avatar">KS</div>
+        
+        <h1>Kawansky Simeon</h1>
+        <div class="tagline">Mobile-First Developer</div>
+
+        <div class="links-container">
+            
+            <div class="btn btn-story" onclick="toggleElement('storyFolder', 'arrowStory')">
+                <i class="fas fa-user-astronaut"></i> Minha Jornada
+                <i class="fas fa-chevron-down arrow" id="arrowStory"></i>
+            </div>
+            <div class="folder-content" id="storyFolder">
+                🚀 <strong>Como comecei:</strong> Comecei na programação focado em entender como a tecnologia funciona e criando meus próprios projetos direto na prática.<br><br>
+                📱 <strong>Mobile-First real:</strong> Todo o meu setup de desenvolvimento é feito <strong>100% pelo celular</strong>. Escrevo código, gerencio repositórios e compilo meus projetos usando ferramentas mobile (como ACode e terminais emulados).<br><br>
+                🛠️ <strong>O que eu desenvolvo:</strong> Criação de utilitários inteligentes em <strong>Python</strong>, arquitetura de sistemas front-end modernos com <strong>HTML5, CSS3 e JavaScript nativo</strong>, além de desenvolvimento de web-games interativos.
+            </div>
+
+            <a href="https://github.com/kawanskysimeon2-lab" target="_blank" class="btn btn-github">
+                <i class="fab fa-github"></i> GitHub Oficial
+            </a>
+
+            <a href="https://www.instagram.com/kawansky.simeon7/" target="_blank" class="btn">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+            
+            <a href="https://discord.com/invite/ck2szznVG" target="_blank" class="btn">
+                <i class="fab fa-discord"></i> Comunidade Discord
+            </a>
+
+            <div class="btn btn-games" onclick="toggleElement('gamesFolder', 'arrowGames')">
+                <i class="fas fa-gamepad"></i> Meus Jogos 
+                <i class="fas fa-chevron-down arrow" id="arrowGames"></i>
+            </div>
+            <div class="folder-content" id="gamesFolder">
+                <a href="https://kawanskysimeon2-lab.github.io/neon-surge" target="_blank" class="btn btn-sub">
+                    <i class="fas fa-play"></i> Neon Surge
+                </a>
+                <a href="https://kawanskysimeon2-lab.github.io/velocity-rush/" target="_blank" class="btn btn-sub">
+                    <i class="fas fa-bolt"></i> Velocity Rush
+                </a>
+            </div>
+
+            <div class="btn btn-apps" onclick="toggleElement('appsFolder', 'arrowApps')">
+                <i class="fas fa-toolbox"></i> Apps & Utilitários
+                <i class="fas fa-chevron-down arrow" id="arrowApps"></i>
+            </div>
+            <div class="folder-content" id="appsFolder">
+                <a href="cronometro.html" class="btn btn-sub"><i class="fas fa-stopwatch"></i> Cronômetro Pro</a>
+            </div>
+
+            <div class="btn btn-contact" onclick="toggleElement('contactSection', 'arrowContact')">
+                <i class="fas fa-envelope"></i> Entrar em Contato
+                <i class="fas fa-chevron-down arrow" id="arrowContact"></i>
+            </div>
+            
+            <form class="contact-form" id="contactSection" action="https://formspree.io/f/seu-email" method="POST">
+                <label>Seu E-mail</label>
+                <input type="email" name="email" required placeholder="exemplo@email.com">
+                
+                <label>Mensagem</label>
+                <textarea name="message" rows="3" required placeholder="Sua proposta ou mensagem..."></textarea>
+                
+                <button type="submit" class="btn-submit">Enviar E-mail</button>
+            </form>
+
+        </div>
+    </div>
+
+    <script>
+        function toggleElement(elementId, arrowId) {
+            const element = document.getElementById(elementId);
+            const arrow = document.getElementById(arrowId);
+            
+            const isOpen = element.style.display === 'flex' || element.style.display === 'block';
+            
+            if (isOpen) {
+                element.style.display = 'none';
+                arrow.style.transform = 'rotate(0deg)';
+            } else {
+                element.style.display = elementId === 'contactSection' || elementId === 'storyFolder' ? 'block' : 'flex';
+                arrow.style.transform = 'rotate(180deg)';
+            }
+        }
+    </script>
+</body>
+</html>
